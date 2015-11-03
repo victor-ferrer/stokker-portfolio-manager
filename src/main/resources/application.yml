@@ -1,7 +1,16 @@
 spring:
-  jpa:
-    generate-ddl: true
-    show-sql: true
+    application:
+      name: PortfolioManager
+    jpa:
+      generate-ddl: true
+      show-sql: true
+
+eureka:
+    client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: http://localhost:8080/eureka/
 
 debug: true
 server:
@@ -22,7 +31,7 @@ management:
 logging:
   level:
     org.springframework.security: DEBUG
-    com.netflix.discovery: 'OFF'
+    com.netflix.discovery: INFO
 
 ---
 spring:
