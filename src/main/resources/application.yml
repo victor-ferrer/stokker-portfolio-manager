@@ -6,9 +6,12 @@ spring:
       show-sql: true
 
 eureka:
+    dashboard:
+      path: /eureka/dashboard 
+        
     client:
-        registerWithEureka: true
-        fetchRegistry: true
+        registerWithEureka: false
+        fetchRegistry: false
         serviceUrl:
             defaultZone: http://localhost:8080/eureka/
 
@@ -80,3 +83,8 @@ security:
     resource:
       userInfoUri: https://api.github.com/user
       preferTokenInfo: false
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: https://stokker-portfolio-manager.herokuapp.com/eureka

@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -63,15 +64,24 @@ public class PortfolioManagerApplication {
     protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter     {
 
 		@Override
+	    public void configure(WebSecurity web) throws Exception {
+	        web.ignoring().antMatchers("/eureka/**");
+	    }
+
+		
+		@Override
 		public void configure(HttpSecurity http) throws Exception {
+		     // @formatter:off
 			http.antMatcher("/portfoliomanager/**").authorizeRequests()
 					.antMatchers(actuatorEndpoints()).hasRole("ADMIN")
-					.antMatchers("/eureka/**").permitAll()
-					.anyRequest().authenticated().and().csrf()
+					.anyRequest().authenticated()
+					.and()
+					.csrf()
 					.csrfTokenRepository(csrfTokenRepository()).and()
 					.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
 					.logout().logoutUrl("/portfoliomanager/logout").permitAll()
 					.logoutSuccessUrl("/");
+		     // @formatter:on
 		}
 		private Filter csrfHeaderFilter() {
 			return new OncePerRequestFilter() {
