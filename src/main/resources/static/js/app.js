@@ -52,7 +52,24 @@ angular.module('portfolio_manager', [ 'ngRoute' ])
 	  
 	  $http.get('/portfolios').success(function(data) {
 		    $scope.portfolios = data._embedded.portfolios;
+
+		    angular.forEach($scope.portfolios, function(portfolio) {
+		    	$http.get('/portfolioValuation/investment').success(function(investmentData){
+		    		portfolio.investment = investmentData;
+		    	})
+		    	
+		    	$http.get('/portfolioValuation/valuation').success(function(valuationData){
+		    		portfolio.valuation = valuationData;
+		    	}).error(function(data, status, headers, config) {
+		    	    $scope.stokkerError = 'unavailable';
+		    	    portfolio.valuation = 0;
+		    	  })		    	
+		    	
+		    });
 	  })
+	  
+	  
+	  
 })
 .controller('portfolioDetailController', function($scope, $http) {
 	  

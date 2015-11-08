@@ -17,13 +17,17 @@
 		<tr ng-repeat="portfolio in portfolios">
 			<td>{{portfolio.label}}</td>
 			<td>{{portfolio.incorporationDate | date}}</td>
-			<td>TODO</td>
-			<td>TODO</td>
-			<td>TODO</td>
+			<td>{{portfolio.investment}}</td>
+			<td>{{portfolio.valuation}}</td>
+			<td>{{portfolio.valuation - portfolio.investment}}</td>
 			<td>{{portfolio.currency}}</td>
 			<td><a href="#/portfolio_detail">Details</a></td>
 		</tr>
 	</table>
+	
+	<div class="alert" ng-show="stokkerError == 'unavailable'" >
+		Portfolio valuations are not available if Stokker is not running!
+	</div>
 	
 	</div>
 </div>

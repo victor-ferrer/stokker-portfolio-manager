@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -31,6 +33,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @RestController
 @RequestMapping("/portfoliomanager")
 @EnableEurekaServer
+@EnableEurekaClient
+@EnableFeignClients
 public class PortfolioManagerApplication {
 
     public static void main(String[] args) {
@@ -58,7 +62,7 @@ public class PortfolioManagerApplication {
 		}
 
 	}
-    
+	
 	@Component
 	@EnableOAuth2Sso
     protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter     {

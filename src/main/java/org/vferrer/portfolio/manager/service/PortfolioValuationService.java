@@ -2,14 +2,25 @@ package org.vferrer.portfolio.manager.service;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 import org.vferrer.portfolio.manager.entitties.Portfolio;
 import org.vferrer.portfolio.manager.entitties.Position;
 import org.vferrer.portfolio.manager.entitties.TradeType;
+import org.vferrer.portfolio.manager.repositories.PortfolioRepository;
+import org.vferrer.portfolio.manager.stokker.StokkerClient;
 
 @Service
 public class PortfolioValuationService {
 
+	
+	@Autowired
+	private PortfolioRepository portfolioRepo;
+	
+	@Autowired
+	private StokkerClient stokkerClient;
+	
 	/**
 	 * Gets the portfolio market value at a current point in time.
 	 * If the date is not specified, the last available date will be taken
@@ -20,6 +31,8 @@ public class PortfolioValuationService {
 	 */
 	public Double findPortfolioMarketValue(Portfolio portfolio, Date targetDate) {
 		// TODO Auto-generated method stub
+		stokkerClient.getStockQuotations();
+		
 		return 100000d;
 	}
 
