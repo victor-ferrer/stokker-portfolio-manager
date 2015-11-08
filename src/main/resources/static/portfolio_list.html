@@ -10,22 +10,26 @@
 			<th>Investment</th>
 			<th>Valuation</th>
 			<th>Yield</th>
-			<th>Currency</th>
 			<th></th>
 		</tr>
 
 		<tr ng-repeat="portfolio in portfolios">
 			<td>{{portfolio.label}}</td>
 			<td>{{portfolio.incorporationDate | date}}</td>
-			<td>{{portfolio.investment}}</td>
-			<td>{{portfolio.valuation}}</td>
+			<td>{{portfolio.investment | currency : portfolio.currency : 2}}</td>
+			<td>{{portfolio.valuation| currency : portfolio.currency : 2}}</td>
 			<td>{{portfolio.valuation - portfolio.investment}}</td>
-			<td>{{portfolio.currency}}</td>
-			<td><a href="#/portfolio_detail">Details</a></td>
+			<td>
+				<a href="#/portfolio_detail">
+				   <button class="btn" >
+	          		<span class="glyphicon"></span>Details
+	        		</button>
+				</a>
+			</td>
 		</tr>
 	</table>
 	
-	<div class="alert" ng-show="stokkerError == 'unavailable'" >
+	<div ng-class="alert" ng-show="stokkerError == 'unavailable'" >
 		Portfolio valuations are not available if Stokker is not running!
 	</div>
 	

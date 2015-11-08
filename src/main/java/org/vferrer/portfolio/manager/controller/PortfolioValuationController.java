@@ -3,6 +3,7 @@ package org.vferrer.portfolio.manager.controller;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.vferrer.portfolio.manager.entitties.Portfolio;
@@ -20,15 +21,15 @@ public class PortfolioValuationController {
 	private PortfolioValuationService valuationService;
 
 	@RequestMapping(value = "investment", produces = "application/json")
-	public String getPortfolioInvestment() {
-		Portfolio portfolio = portfolioRepository.findOne(Long.parseLong("1"));
+	public String getPortfolioInvestment(@Param("portfolioId")String portfolioId) {
+		Portfolio portfolio = portfolioRepository.findOne(Long.parseLong(portfolioId));
 
 		return valuationService.findPorfolioInvestment(portfolio).toString();
 	}
 	
 	@RequestMapping(value = "valuation", produces = "application/json")
-	public String getPortfolioValuation() {
-		Portfolio portfolio = portfolioRepository.findOne(Long.parseLong("1"));
+	public String getPortfolioValuation(@Param("portfolioId")String portfolioId) {
+		Portfolio portfolio = portfolioRepository.findOne(Long.parseLong(portfolioId));
 
 		return valuationService.findPortfolioMarketValue(portfolio, new Date()).toString();
 	}

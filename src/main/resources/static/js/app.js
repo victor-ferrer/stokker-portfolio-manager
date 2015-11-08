@@ -53,12 +53,12 @@ angular.module('portfolio_manager', [ 'ngRoute' ])
 	  $http.get('/portfolios').success(function(data) {
 		    $scope.portfolios = data._embedded.portfolios;
 
-		    angular.forEach($scope.portfolios, function(portfolio) {
-		    	$http.get('/portfolioValuation/investment').success(function(investmentData){
+		    angular.forEach($scope.portfolios, function(portfolio, key) {
+		    	$http.get('/portfolioValuation/investment?portfolioId=' + (key + 1)).success(function(investmentData){
 		    		portfolio.investment = investmentData;
-		    	})
+		    	});
 		    	
-		    	$http.get('/portfolioValuation/valuation').success(function(valuationData){
+		    	$http.get('/portfolioValuation/valuation?portfolioId=' + (key + 1)).success(function(valuationData){
 		    		portfolio.valuation = valuationData;
 		    	}).error(function(data, status, headers, config) {
 		    	    $scope.stokkerError = 'unavailable';

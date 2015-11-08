@@ -88,3 +88,7 @@ eureka:
     client:
         serviceUrl:
             defaultZone: https://stokker-portfolio-manager.herokuapp.com/eureka
+stokker:
+  ribbon:
+    DeploymentContextBasedVipAddresses: stokker.herokuapp.com
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList            

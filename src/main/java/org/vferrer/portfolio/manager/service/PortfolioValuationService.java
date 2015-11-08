@@ -4,19 +4,13 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
 import org.vferrer.portfolio.manager.entitties.Portfolio;
 import org.vferrer.portfolio.manager.entitties.Position;
 import org.vferrer.portfolio.manager.entitties.TradeType;
-import org.vferrer.portfolio.manager.repositories.PortfolioRepository;
 import org.vferrer.portfolio.manager.stokker.StokkerClient;
 
 @Service
 public class PortfolioValuationService {
-
-	
-	@Autowired
-	private PortfolioRepository portfolioRepo;
 	
 	@Autowired
 	private StokkerClient stokkerClient;
@@ -29,11 +23,19 @@ public class PortfolioValuationService {
 	 * @param targetDate 
 	 * @return
 	 */
+	// TODO: We have to consider different currencies
 	public Double findPortfolioMarketValue(Portfolio portfolio, Date targetDate) {
-		// TODO Auto-generated method stub
-		stokkerClient.getStockQuotations();
+		Double value = 0d;
+
+		for (Position position : portfolio.getPositions()){
+			String request = position.getStock().getTicker();
+			if (position.getStock().isNeedMarketSuffix()){
+				request = request + "." + position.getStock().getMarket();
+			}
+			value += position.getAmount() * stokkerClient.getLastStockPrice(request).getValue();
+		}
 		
-		return 100000d;
+		return value;
 	}
 
 	/**
