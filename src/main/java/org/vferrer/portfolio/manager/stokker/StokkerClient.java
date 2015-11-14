@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(serviceId = "stokker")
+@FeignClient("stokker")
 public interface StokkerClient 
 {
 	@RequestMapping(method = RequestMethod.GET, value = "/stockQuotationJPAs")
