@@ -67,6 +67,12 @@ security:
       preferTokenInfo: false
 
 eureka:
-    client:
-        serviceUrl:
-            defaultZone: https://stokker-portfolio-manager.herokuapp.com/eureka
+  password: user
+  client:
+    serviceUrl:
+      defaultZone: https://user:${eureka.password}@stokker-portfolio-manager.herokuapp.com/eureka
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    metadataMap:
+      instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}            
+            
