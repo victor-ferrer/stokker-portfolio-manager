@@ -70,7 +70,7 @@ eureka:
   password: user
   client:
     serviceUrl:
-      defaultZone: https://user:${eureka.password}@stokker-portfolio-manager.herokuapp.com/eureka
+      defaultZone: https://user:${eureka.password}@stokker-portfolio-manager.herokuapp.com/eureka/
   instance:
     leaseRenewalIntervalInSeconds: 10
     metadataMap:
