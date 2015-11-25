@@ -26,9 +26,9 @@ public class InfoConfig
 	@Autowired
 	private ConfigurableEnvironment env;
 	
-	@Value("classpath:git.properties")
-	private Resource gitProperties;
-	
+//	@Value("classpath:git.properties")
+//	private Resource gitProperties;
+//	
 	
 	@Bean
 	public InfoEndpoint infoEndpoint() throws Exception
@@ -43,14 +43,14 @@ public class InfoConfig
 		HashMap<String, Object> info = new HashMap<String,Object>();
 		info.put("info", propFactory.getObject());
 		
-		Properties gitProps = new Properties();
-		PropertiesLoaderUtils.fillProperties(gitProps, gitProperties);
-		
-		PropertiesConfigurationFactory<Properties> gitPropFactory = new PropertiesConfigurationFactory(new HashMap<String,Object>());
-		gitPropFactory.setTargetName("git");
-		gitPropFactory.setProperties(gitProps);
-		info.put("git", gitPropFactory.getObject());
-		
+//		Properties gitProps = new Properties();
+//		PropertiesLoaderUtils.fillProperties(gitProps, gitProperties);
+//		
+//		PropertiesConfigurationFactory<Properties> gitPropFactory = new PropertiesConfigurationFactory(new HashMap<String,Object>());
+//		gitPropFactory.setTargetName("git");
+//		gitPropFactory.setProperties(gitProps);
+//		info.put("git", gitPropFactory.getObject());
+//		
 		return new InfoEndpoint(info);
 	}
 	

@@ -172,6 +172,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+<!-- This plugin does not work with Heroku			
 			<plugin>
 				<groupId>pl.project13.maven</groupId>
 				<version>2.1.13</version>
@@ -189,7 +190,7 @@
 					  <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
 				</configuration>
 			</plugin>
-		</plugins>
+-->		</plugins>
 	</build>
 
 
