@@ -4,13 +4,13 @@ spring:
     jpa:
       generate-ddl: true
       show-sql: true
-
 eureka:
+    password: user
     dashboard:
       path: /eureka/dashboard 
     client:
         serviceUrl:
-            defaultZone: http://localhost:9999/eureka/        
+            defaultZone: http://user:${eureka.password}@localhost:9999/eureka/
     instance:
         leaseRenewalIntervalInSeconds: 10
         metadataMap:

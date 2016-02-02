@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -62,7 +63,6 @@ public class PortfolioManagerApplication {
 		}
 
 	}
-	
 	@Component
 	@EnableOAuth2Sso
     protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter     {
@@ -80,9 +80,9 @@ public class PortfolioManagerApplication {
 					.antMatchers(actuatorEndpoints()).hasRole("ADMIN")
 					.anyRequest().authenticated()
 					.and()
-					.csrf()
-					.csrfTokenRepository(csrfTokenRepository()).and()
-					.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
+//					.csrf()
+//					.csrfTokenRepository(csrfTokenRepository()).and()
+//					.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
 					.logout().logoutUrl("/portfoliomanager/logout").permitAll()
 					.logoutSuccessUrl("/");
 		     // @formatter:on
