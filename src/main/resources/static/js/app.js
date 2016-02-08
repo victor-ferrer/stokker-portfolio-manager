@@ -100,7 +100,7 @@ angular.module('portfolio_manager', [ 'ngRoute' ])
 		  		$scope.query = $scope.targetStock.ticker + "." + $scope.targetStock.market;
 		  		
 		  		// WARNING This should be customized with the URL created by Kibana when exporting the dashboard
-		  		$scope.dahsboardURL = $sce.trustAsResourceUrl("http://localhost:5601/#/dashboard/Full_dashboard?embed&_g=(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-1y,mode:quick,to:now))&_a=(filters:!(),panels:!((col:1,id:Stock-Values,row:1,size_x:12,size_y:4,type:visualization),(col:1,id:Stock-volume,row:7,size_x:12,size_y:2,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'stock%3D!'"+ $scope.query +  "!'')),title:Full_dashboard)");		  
+		  		$scope.dahsboardURL = $sce.trustAsResourceUrl("http://188.166.3.150:5601/#/dashboard/Full_dashboard?embed&_g=(refreshInterval:(display:Off,pause:!f,section:0,value:0),time:(from:now-1y,mode:quick,to:now))&_a=(filters:!(),panels:!((col:1,id:Stock-Values,row:1,size_x:12,size_y:4,type:visualization),(col:1,id:Stock-volume,row:7,size_x:12,size_y:2,type:visualization)),query:(query_string:(analyze_wildcard:!t,query:'stock%3D!'"+ $scope.query +  "!'')),title:Full_dashboard)");		  
 		  	});
 		  	
 		  	$scope.timeframes = [{ "label" : "Last 2 years", "code" : "now-2y"},
