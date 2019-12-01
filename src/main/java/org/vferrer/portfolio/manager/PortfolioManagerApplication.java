@@ -11,17 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.cloud.client.SpringCloudApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
@@ -57,14 +52,13 @@ public class PortfolioManagerApplication {
 	@Controller
 	public static class LoginErrors {
 
-		@RequestMapping("/portfoliomanager/login")
+		@RequestMapping("/login")
 		public String dashboard() {
 			return "redirect:/#/";
 		}
 
 	}
 	@Component
-	@EnableOAuth2Sso
     protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter     {
 
 		@Override
@@ -76,14 +70,16 @@ public class PortfolioManagerApplication {
 		@Override
 		public void configure(HttpSecurity http) throws Exception {
 		     // @formatter:off
-			http.antMatcher("/portfoliomanager/**").authorizeRequests()
+			http.antMatcher("/**").authorizeRequests()
 					.antMatchers(actuatorEndpoints()).hasRole("ADMIN")
 					.anyRequest().authenticated()
+					.and()
+					.oauth2Login()
 					.and()
 //					.csrf()
 //					.csrfTokenRepository(csrfTokenRepository()).and()
 //					.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
-					.logout().logoutUrl("/portfoliomanager/logout").permitAll()
+					.logout().logoutUrl("/logout").permitAll()
 					.logoutSuccessUrl("/");
 		     // @formatter:on
 		}

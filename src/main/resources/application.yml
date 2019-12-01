@@ -1,9 +1,28 @@
 spring:
-    application:
-      name: PortfolioManager
-    jpa:
-      generate-ddl: true
-      show-sql: true
+  application:
+    name: PortfolioManager
+  jpa:
+    generate-ddl: true
+    show-sql: true
+  security:
+    oauth2:
+      client:
+         registration:
+           github:
+              clientId: 66591dd6252b020a4f8e
+              clientSecret: f65273520b393b7cbd26646de5ddd4f00bd35450
+              accessTokenUri: https://github.com/login/oauth/access_token
+              userAuthorizationUri: https://github.com/login/oauth/authorize
+         provider:
+            github:
+              user-info-uri: https://api.github.com/user 
+              prefer-token-info: false
+                
+    user:
+      password: user
+    ignored: /,/favicon.ico,/index.html,/home.html,/portfolio_details.html,/stocks.html,/js/**,/css/**,/webjars/**
+    sessions: ALWAYS
+
 eureka:
     password: user
     dashboard:
@@ -16,56 +35,36 @@ eureka:
         metadataMap:
             instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
 
-debug: true
+debug: false
 server:
   port: 9999
 
-security:
-  user:
-    password: user
-  ignored: /,/favicon.ico,/index.html,/home.html,/portfolio_details.html,/stocks.html,/js/**,/css/**,/webjars/**
-  sessions: ALWAYS
-  oauth2:
-    sso:
-      loginPath: /portfoliomanager/login
-management:
-  security:
-    role: ADMIN
 
 logging:
   level:
     org.springframework.security: DEBUG
-    com.netflix.discovery: INFO
+    com:
+      netflix:
+        discovery: INFO
 
----
-spring:
-  profiles: github_local
-security:
-  oauth2:
-    client:
-         clientId: 66591dd6252b020a4f8e
-         clientSecret: f65273520b393b7cbd26646de5ddd4f00bd35450
-         accessTokenUri: https://github.com/login/oauth/access_token
-         userAuthorizationUri: https://github.com/login/oauth/authorize
-         clientAuthenticationScheme: form
-    resource:
-      userInfoUri: https://api.github.com/user
-      preferTokenInfo: false
 ---
 spring:
   profiles: github_heroku
-security:
-  oauth2:
-    client:
-      clientId: 2c67f85b2b3be28a6251
-      clientSecret: e074e98c491f383d1ee3b580bca9f779073ac940
-      accessTokenUri: https://github.com/login/oauth/access_token
-      userAuthorizationUri: https://github.com/login/oauth/authorize
-      clientAuthenticationScheme: form
-    resource:
-      userInfoUri: https://api.github.com/user
-      preferTokenInfo: false
-
+  security:
+    oauth2:
+      client:
+         registration:
+           github:      
+              clientId: 2c67f85b2b3be28a6251
+              clientSecret: e074e98c491f383d1ee3b580bca9f779073ac940
+              accessTokenUri: https://github.com/login/oauth/access_token
+              userAuthorizationUri: https://github.com/login/oauth/authorize
+              clientAuthenticationScheme: form
+         provider:
+            github:
+              user-info-uri: https://api.github.com/user 
+              prefer-token-info: false              
+      
 eureka:
   password: user
   client:

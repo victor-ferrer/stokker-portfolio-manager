@@ -21,15 +21,17 @@ public class PortfolioValuationController {
 	private PortfolioValuationService valuationService;
 
 	@RequestMapping(value = "investment", produces = "application/json")
-	public String getPortfolioInvestment(@Param("portfolioId")String portfolioId) {
-		Portfolio portfolio = portfolioRepository.findOne(Long.parseLong(portfolioId));
+	public String getPortfolioInvestment(@Param("portfolioId")String portfolioId) throws NumberFormatException, PortfolioNotFoundException {
+		Portfolio portfolio = portfolioRepository.findById(Long.parseLong(portfolioId))
+												 .orElseThrow(() -> new PortfolioNotFoundException(portfolioId));
 
 		return valuationService.findPorfolioInvestment(portfolio).toString();
 	}
 	
 	@RequestMapping(value = "valuation", produces = "application/json")
-	public String getPortfolioValuation(@Param("portfolioId")String portfolioId) {
-		Portfolio portfolio = portfolioRepository.findOne(Long.parseLong(portfolioId));
+	public String getPortfolioValuation(@Param("portfolioId")String portfolioId) throws NumberFormatException, PortfolioNotFoundException {
+		Portfolio portfolio = portfolioRepository.findById(Long.parseLong(portfolioId))
+												 .orElseThrow(() -> new PortfolioNotFoundException(portfolioId));
 
 		return valuationService.findPortfolioMarketValue(portfolio, new Date()).toString();
 	}

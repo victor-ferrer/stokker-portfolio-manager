@@ -19,7 +19,7 @@
 			<li ng-class="{active:tab('portfolio_list')" ng-show="authenticated"><a href="#/portfolio_list">Managed Portfolios</a></li>
 			<li ng-class="{active:tab('stock')" ng-show="authenticated"><a href="#/stocks">Managed Stocks</a></li>
 			<li ng-show="authenticated"><a href="" ng-click="logout()">Sign out</a></li>
-			<li ng-show="authenticated"><a href="" ><img ng-src="{{user.userAuthentication.details.avatar_url}}" width="25px" height="25px"/> {{user.name}}</a></li>
+			<li ng-show="authenticated"><a href="" ><img ng-src="{{user.principal.attributes.avatar_url}}" width="25px" height="25px"/> {{user.principal.attributes.login}}</a></li>
 		</ul>
 	</div>
 	
