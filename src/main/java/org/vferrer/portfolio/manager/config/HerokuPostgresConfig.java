@@ -2,9 +2,11 @@ package org.vferrer.portfolio.manager.config;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Driver;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -34,7 +36,10 @@ public class HerokuPostgresConfig {
 
 		SimpleDriverDataSource basicDataSource = new SimpleDriverDataSource();
 		basicDataSource.setUrl(dbUrl);
-		basicDataSource.setDriverClass(org.postgresql.Driver.class);
+		
+		Driver postgresDriver = BeanUtils.instantiateClass(org.postgresql.Driver.class);
+		System.out.println("Driver to use: " + postgresDriver.toString());
+		basicDataSource.setDriver(postgresDriver);
 		basicDataSource.setUsername(username);
 		basicDataSource.setPassword(password);
 
