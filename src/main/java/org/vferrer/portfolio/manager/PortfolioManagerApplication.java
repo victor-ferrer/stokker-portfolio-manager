@@ -28,12 +28,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-@SpringBootApplication
 @RestController
 @RequestMapping("/portfoliomanager")
 @EnableEurekaServer
-@EnableEurekaClient
 @EnableFeignClients
+@SpringCloudApplication
 public class PortfolioManagerApplication {
 
     public static void main(String[] args) {
