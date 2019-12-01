@@ -34,6 +34,7 @@ public class HerokuPostgresConfig {
 
 		SimpleDriverDataSource basicDataSource = new SimpleDriverDataSource();
 		basicDataSource.setUrl(dbUrl);
+		basicDataSource.setDriverClass(org.postgresql.Driver.class);
 		basicDataSource.setUsername(username);
 		basicDataSource.setPassword(password);
 
