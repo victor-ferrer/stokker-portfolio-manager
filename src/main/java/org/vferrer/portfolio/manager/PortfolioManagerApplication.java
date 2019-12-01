@@ -71,7 +71,6 @@ public class PortfolioManagerApplication {
 		public void configure(HttpSecurity http) throws Exception {
 		     // @formatter:off
 			http.antMatcher("/**").authorizeRequests()
-					.antMatchers(actuatorEndpoints()).hasRole("ADMIN")
 					.anyRequest().authenticated()
 					.and()
 					.oauth2Login()
@@ -107,12 +106,5 @@ public class PortfolioManagerApplication {
 			repository.setHeaderName("X-XSRF-TOKEN");
 			return repository;
 		}
-		
-	    private String[] actuatorEndpoints() {
-	        return new String[]{"mappings"};
-	    }
-    	
     }
-
-    
 }

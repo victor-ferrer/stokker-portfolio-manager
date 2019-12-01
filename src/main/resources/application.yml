@@ -23,6 +23,12 @@ spring:
     ignored: /,/favicon.ico,/index.html,/home.html,/portfolio_details.html,/stocks.html,/js/**,/css/**,/webjars/**
     sessions: ALWAYS
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 eureka:
     password: user
     dashboard:
@@ -41,11 +47,9 @@ server:
 
 
 logging:
-  level:
-    org.springframework.security: DEBUG
-    com:
-      netflix:
-        discovery: INFO
+ level:
+    org.springframework.security: INFO
+    com.netflix.discovery: INFO
 
 ---
 spring:
