@@ -4,6 +4,8 @@ spring:
   jpa:
     generate-ddl: true
     show-sql: true
+  datasource:
+    initialization-mode: always    
   security:
     oauth2:
       client:
